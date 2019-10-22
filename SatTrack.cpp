@@ -36,6 +36,45 @@ public:
 
 	}
 
+	void insertSatelliteItem(string passedID, string passedOfficialName, string passedDesignator, string passedLaunchDate, string passedLatitude, string passedLongitude, string passedAltitude) {
+		setID(passedID);
+		setOfficialName(passedOfficialName);
+		setSatelliteDesignator(passedDesignator);
+		setLaunchDate(passedLaunchDate);
+		setLatitude(passedLatitude);
+		setLongitude(passedLongitude);
+		setAltitude(passedAltitude);
+	}
+
+	void display(int choiceValue) {
+		cout << "\n";
+		displaySatelliteOfficialName(choiceValue);
+		displaySatelliteDesignator(choiceValue);
+		displayLaunchDate(choiceValue);
+		displayAltitude(choiceValue);
+		displayLatitude(choiceValue);
+		displayLongitude(choiceValue);
+	}
+
+	virtual void showCrafts(vector<string> satOfficialName) {
+		for (size_t i = 0; i < satOfficialName.size(); i++) {
+			cout << "\n" << i + 1 << ". " << this->satOfficialName.at(i);
+		}
+	}
+
+	virtual void showSatelliteList() {
+		for (size_t i = 0; i < this->satID.size(); i++) {
+			cout << "\n" << i + 1 << ". " << getSatelliteOfficialName(i);
+		}
+	}
+
+	int satChoice() {
+		int userInput;
+		cout << "\n" << "Your choice: ";
+		cin >> userInput;
+		return userInput;
+	}
+
 	void setID(string passedID) {
 		this->satID.push_back(passedID);
 	}
@@ -56,6 +95,10 @@ public:
 		return this->satOfficialName.at(choice);
 	}
 
+	void displaySatelliteOfficialName(int choice) {
+		cout << "Name: " << getSatelliteOfficialName(choice) << "\n";
+	}
+
 	vector<string> getSatelliteOfficialName() {
 		return this->satOfficialName;
 	}
@@ -66,6 +109,10 @@ public:
 
 	string getSatelliteDesignator(int choice) {
 		return this->satDesignator.at(choice);
+	}
+
+	void displaySatelliteDesignator(int choice) {
+		cout << "Designator: " << getSatelliteDesignator(choice) << "\n";
 	}
 
 	vector<string> getSatelliteDesignator() {
@@ -80,6 +127,10 @@ public:
 		return this->satLaunchDate.at(choice);
 	}
 
+	void displayLaunchDate(int choice) {
+		cout << "Launch Date: " << getLaunchDate(choice) << "\n";
+	}
+
 	vector<string> getLaunchDate() {
 		return this->satLaunchDate;
 	}
@@ -90,6 +141,10 @@ public:
 
 	string getLatitude(int choice) {
 		return this->satLatitude.at(choice);
+	}
+
+	void displayLatitude(int choice) {
+		cout << "Latitude: " << getLatitude(choice) << "\n";
 	}
 
 	vector<string> getLatitude() {
@@ -105,6 +160,10 @@ public:
 		return this->satLongitude.at(choice);
 	}
 
+	void displayLongitude(int choice) {
+		cout << "Longitude: " << getLongitude(choice) << "\n";
+	}
+
 	vector<string> getLongitude() {
 		return this->satLongitude;
 	}
@@ -118,6 +177,10 @@ public:
 		return this->satAltitude.at(choice);
 	}
 
+	void displayAltitude(int choice) {
+		cout << "Altitude: " << getAltitude(choice) << "\n";
+	}
+
 	vector<string>getAltitude() {
 		return this->satAltitude;
 	}
@@ -125,19 +188,12 @@ public:
 };
 
 
-class APIConnection {
-/*	vector<string> satID;
-	vector<string> satOfficialName;
-	vector<string> satDesignator;
-	vector<string> satLaunchDate;
-	vector<string> satLatitude;
-	vector<string> satLongitude;
-	vector<string> satAltitude;*/
+class GetWebData {
 	SatelliteInformation SI;
 	
 public:
-	void initializeAPI(CurrentLocation userDefinedCurrentLocation) {
-		string rawSatelliteOutput = downloadSatelliteList(userDefinedCurrentLocation.getLongitude(), userDefinedCurrentLocation.getLatitude(), userDefinedCurrentLocation.getElevation());
+	void initializeAPI() {
+		string rawSatelliteOutput = downloadSatelliteList();
 		vector<string> unformattedSatelliteList = convertSatelliteToJSON(rawSatelliteOutput);
 		insertSatellitesAboveToVectors(unformattedSatelliteList);
 		//cout << unformattedSatelliteList.at(2);
@@ -151,62 +207,37 @@ public:
 		return this->SI.getID(choice);
 	}
 
-	/*vector<string> getID() {
-		return this->satID;
-	}*/
-
 	string getSatelliteOfficialName(int choice) {
 		return this->SI.getSatelliteOfficialName(choice);
 	}
-
-	/*vector<string> getSatelliteOfficialName() {
-		return this->satOfficialName;
-	}*/
 
 	string getSatelliteDesignator(int choice) {
 		return this->SI.getSatelliteDesignator(choice);
 	}
 
-	/*vector<string> getSatelliteDesignator() {
-		return this->satDesignator;
-	}*/
-
 	string getLaunchDate(int choice) {
 		return this->SI.getLaunchDate(choice);
 	}
-
-	/*vector<string> getLaunchDate() {
-		return this->satLaunchDate;
-	}*/
 
 	string getLatitude(int choice) {
 		return this->SI.getLatitude(choice);
 	}
 
-	/*vector<string> getLatitude() {
-		return this->satLatitude;
-	}*/
-
 	string getLongitude(int choice) {
 		return this->SI.getLongitude(choice);
 	}
-
-	/*vector<string> getLongitude() {
-		return this->satLongitude;
-	}*/
 
 	string getAltitude(int choice) {
 		return this->SI.getAltitude(choice);
 	}
 
-	/*vector<string>getAltitude() {
-		return this->satAltitude;
+private:
+	/*string downloadSatelliteList(CurrentLocation udcl) {
+		return cpr::Get(cpr::Url{ getAPIURL(udcl.getLongitude(), udcl.getLatitude(), udcl.getElevation()) }).text;
 	}*/
 
-
-private:
-	string downloadSatelliteList(double passedLongitude, double passedLatitude, double passedElevation) {
-		return cpr::Get(cpr::Url{ getAPIURL(passedLongitude, passedLatitude, passedElevation) }).text;
+	string downloadSatelliteList() {
+		return cpr::Get(cpr::Url{ getAPIURL("-83.045753", "42.331429", "656") }).text;
 	}
 
 	vector<string> convertSatelliteToJSON(string rawSatelliteOutput) {
@@ -226,41 +257,38 @@ private:
 	void insertSatellitesAboveToVectors(vector<string> unformattedSatelliteList) {
 		for (size_t p = 0; p < unformattedSatelliteList.size(); p++) {
 			json stringToJSON = json::parse(unformattedSatelliteList.at(p));
-			SI.setID(to_string(stringToJSON.find("satid").value()));
-			//satID.push_back(to_string(stringToJSON.find("satid").value()));
+			SI.insertSatelliteItem(to_string(stringToJSON.find("satid").value()), to_string(stringToJSON.find("satname").value()), to_string(stringToJSON.find("intDesignator").value()), to_string(stringToJSON.find("launchDate").value()), to_string(stringToJSON.find("satlat").value()), to_string(stringToJSON.find("satlng").value()), to_string(stringToJSON.find("satalt").value()));
+	/*		SI.setID(to_string(stringToJSON.find("satid").value()));
 			SI.setOfficialName(to_string(stringToJSON.find("satname").value()));
-			//satOfficialName.push_back(to_string(stringToJSON.find("satname").value()));
 			SI.setSatelliteDesignator(to_string(stringToJSON.find("intDesignator").value()));
-			//satDesignator.push_back(to_string(stringToJSON.find("intDesignator").value()));
 			SI.setLaunchDate(to_string(stringToJSON.find("launchDate").value()));
-			//satLaunchDate.push_back(to_string(stringToJSON.find("launchDate").value()));
 			SI.setLatitude(to_string(stringToJSON.find("satlat").value()));
-			//satLatitude.push_back(to_string(stringToJSON.find("satlat").value()));
 			SI.setLongitude(to_string(stringToJSON.find("satlng").value()));
-			//satLongitude.push_back(to_string(stringToJSON.find("satlng").value()));
-			SI.setAltitude(to_string(stringToJSON.find("satalt").value()));
-			//satAltitude.push_back(to_string(stringToJSON.find("satalt").value()));
+			SI.setAltitude(to_string(stringToJSON.find("satalt").value()));*/
 		}
 	}
 
-	string getAPIURL(double longitude, double latitude, double elevation) {
-		return "https://www.n2yo.com/rest/v1/satellite/above/" + to_string(longitude) + "/" + to_string(latitude) + "/" + to_string(elevation) + "/70/18/&apiKey=DARUHH-CVU8AH-H9U5KE-47PU";
+	string getAPIURL(string longitude, string latitude, string elevation) {
+		return "https://www.n2yo.com/rest/v1/satellite/above/" + longitude + "/" + latitude + "/" + elevation + "/70/18/&apiKey=DARUHH-CVU8AH-H9U5KE-47PU";
 	}
 
 };
 
 
 class CurrentLocation {
-
-	double longitude;
-	double latitude;
-	double elevation;
+	string longitude;
+	string latitude;
+	string elevation;
 
 public: 
 	CurrentLocation() {
-		setLongitude();
+		/*setLongitude(); // These are commented out because I'm sick of typing them.
 		setLatitude();
-		setElevation();
+		setElevation();*/
+		this->longitude = "-83.045753";
+		this->latitude = "42.331429";
+		this->elevation = "656";
+
 	}
 protected:
 	void setLongitude() {
@@ -279,22 +307,22 @@ protected:
 	}
 
 public:
-	double getLongitude() {
+	string getLongitude() {
 		return this->longitude;
 	}
 
-	double getLatitude() {
+	string getLatitude() {
 		return this->latitude;
 	}
 
-	double getElevation() {
+	string getElevation() {
 		return this->elevation;
 	}
 
 };
 
 
-class SatData {
+/*class SatData {
 	vector<string> satID;
 	vector<string> satOfficialName;
 	vector<string> satDesignator;
@@ -311,7 +339,7 @@ public:
 	}
 
 	SatData(SatelliteInformation passedSI) {
-		this->createdSI = passedSI;
+		this->createdSI = passedSI;*/
 		/*this->satID = passedData.getID;
 		this->satOfficialName = passedData.getSatelliteOfficialName();
 		this->satDesignator = passedData.getSatelliteDesignator();
@@ -320,7 +348,7 @@ public:
 		this->satLongitude = passedData.getLongitude();
 		this->satAltitude = passedData.getAltitude();*/
 
-		showCrafts(createdSI.getSatelliteOfficialName());
+	/*	showCrafts(createdSI.getSatelliteOfficialName());
 	}
 
 	void display(int choiceValue) {
@@ -333,24 +361,8 @@ public:
 		displaySatelliteLongitude(choiceValue);
 	}
 
-	virtual void showCrafts(vector<string> satOfficialName) {
-		for (size_t i = 0; i < satOfficialName.size(); i++) {
-			cout << "\n" << i + 1 << ". " << satOfficialName.at(i);
-		}
-	}
 
-	virtual void showSatelliteList() {
-		for (size_t i = 0; i < this->satID.size(); i++) {
-			cout << "\n" << i + 1 << ". " << getSatelliteName(i);
-		}
-	}
 
-	int satChoice() {
-		int userInput;
-		cout << "\n" << "Your choice: ";
-		cin >> userInput;
-		return userInput;
-	}
 
 	string getSatelliteID(int value) {
 		return this->satID.at(value);
@@ -365,6 +377,7 @@ public:
 	}
 
 	void displaySatelliteName(int value) {
+		cout << this->satOfficialName.size();
 		cout << "Name: " + getSatelliteName(value) << "\n";
 	}
 
@@ -408,25 +421,26 @@ public:
 		cout << "Altitude: " << getSatelliteAltitude(value) << "\n";
 	}
 
-};
+};*/
 
 
 int main() {
 	int userInput;
 	cout << "Sat Track\n";
 	SatelliteInformation SI;
-	APIConnection apc;
+	GetWebData apc;
 	CurrentLocation CL;
-	apc.initializeAPI(CL);
+	apc.initializeAPI();
 	//cout << apc.outputAPIText();
 	SI = apc.getSIData();
-	SatData SD(SI);
+	//SatData SD(SI);
 	
 
 
 	//SD.showCrafts(apc.getSatelliteOfficialName());
-	userInput = SD.satChoice();
-	SD.display(userInput - 1 );
+	SI.showSatelliteList();
+	userInput = SI.satChoice();
+	SI.display(userInput - 1 );
 	return 0;
 }
 

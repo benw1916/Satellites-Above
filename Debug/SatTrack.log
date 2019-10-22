@@ -1,7 +1,2 @@
 ﻿  SatTrack.cpp
-c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(139): error C2061: syntax error: identifier 'CurrentLocation'
-c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(140): error C2065: 'userDefinedCurrentLocation': undeclared identifier
-c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(140): error C2660: 'APIConnection::downloadSatelliteList': function does not take 1 arguments
-  c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(208): note: see declaration of 'APIConnection::downloadSatelliteList'
-c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(420): error C2660: 'APIConnection::initializeAPI': function does not take 1 arguments
-  c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(139): note: see declaration of 'APIConnection::initializeAPI'
+  SatTrack.vcxproj -> C:\Users\MHP-14M-D5\source\repos\SatTrack\Debug\SatTrack.exe
