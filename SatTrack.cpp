@@ -11,6 +11,7 @@
 #include <json/reader.h>
 #include <json/writer.h>
 #include <json/value.h>
+#include <math.h>
 #include <nlohmann/json.hpp>
 
 
@@ -20,21 +21,22 @@ using json = nlohmann::json;
 //  https://www.n2yo.com/rest/v1/satellite/above/42.331429/-83.045753/656/70/18/&apiKey=DARUHH-CVU8AH-H9U5KE-47PU
 // API KEy: DARUHH-CVU8AH-H9U5KE-47PU
 
-// Detroit Longitude: -83.045753	Latitude: 42.331429		Elevation: 656
+// Detroit Longitude: -83.045753	Latitude: 42.331429		Elevation: 200 meters
 
 class CurrentLocation {
 	string longitude;
 	string latitude;
 	string elevation;
+	bool UoM;
 
 public:
 	CurrentLocation() {
-		setLongitude(); // These are commented out because I'm sick of typing them.
+		setLongitude(); 
 		setLatitude();
 		setElevation();
-		/*this->longitude = "-83.045753";
+		/*this->longitude = "-83.045753"; // This is for testing purposes; I get sick of typing them.
 		this->latitude = "42.331429";
-		this->elevation = "656";*/
+		this->elevation = "200";*/
 
 	}
 protected:
@@ -53,6 +55,11 @@ protected:
 		cin >> this->elevation;
 	}
 
+	void setUnitOfMeasure() {
+		cout << "Imperial or Metric: ";
+		cin >> this->UoM;
+	}
+
 public:
 	string getLongitude() {
 		return this->longitude;
@@ -65,6 +72,9 @@ public:
 	string getElevation() {
 		return this->elevation;
 	}
+
+private:
+
 
 };
 
@@ -234,6 +244,48 @@ public:
 };
 
 
+class Calculations {
+
+/*	void calculateAzimuth(CurrentLocation cl, SatelliteLocation sl) {
+		// arctan((x2 –x1)/(y2 –y1))
+		atan((stod(cl.getLatitude()) - stod(cl.getLongitude())) / (stod(sl.getLatitude()) - stod(sl.getLongitude())));
+
+	}*/
+
+};
+
+
+class SatelliteLocation {
+	string name;
+	string longitude;
+	string latitude;
+	string altitude;
+
+	void setSatelliteInformation(string passedName, string passedLongitude, string passedLatitude, string passedAltitude) {
+		this->name = passedName;
+		this->longitude = passedLongitude;
+		this->latitude = passedLatitude;
+		this->altitude = passedAltitude;
+	}
+public:
+	string getName() {
+		return this->name;
+	}
+
+	string getLongitude() {
+		return this->longitude;
+	}
+
+	string getLatitude() {
+		return this->latitude;
+	}
+
+	string getAltitude() {
+		return this->altitude;
+	}
+
+
+};
 
 class GetWebData {
 	SatelliteInformation SI;
@@ -321,12 +373,14 @@ int main() {
 	SatelliteInformation SI;
 	GetWebData apc;
 	CurrentLocation CL;
+	SatelliteLocation sl;
 	apc.initializeAPI(CL);
 	SI = apc.getSIData();
 
 	SI.showSatelliteList();
 	userInput = SI.satChoice();
 	SI.display(userInput - 1 );
+//	sl = SI.outputToClass(userInput - 1);
 	return 0;
 }
 
