@@ -42,28 +42,28 @@ public:
 	}
 protected:
 	void setLongitude() {
-		cout << "Enter your longitude: ";
+		cout << "Enter longitude: ";
 		cin >> this->longitude;
 	}
 
 	void setLatitude() {
-		cout << "Enter your latitude: ";
+		cout << "Enter latitude: ";
 		cin >> this->latitude;
 	}
 
 	void setElevation() {
-		cout << "Enter your elevation from sea level (in meters): ";
+		cout << "Enter elevation from sea level (in meters): ";
 		cin >> this->elevation;
 	}
 
 	void displaySatelliteCategories() {
 		int satelliteChoice;
-		for (int i = 0; i < satelliteCategories.size(); i++) {
-			cout << "\n" << i + 1 << ". " << satelliteCategories.at(i);
+		for (int i = 0; i < sizeof(satelliteCategories); i++) {
+			cout << "\n" << i + 1 << ". " << satelliteCategories[i];
 		}
 		cout << "\nYour choice: ";
 		cin >> satelliteChoice;
-		this->satelliteCategory = satelliteValues.at(satelliteChoice);
+		this->satelliteCategory = satelliteValues[satelliteChoice];
 	}
 
 
@@ -85,187 +85,199 @@ public:
 	}
 
 private:
-	vector<string> satelliteCategories = { "Amateur radio", "Beidou Navigation System", "Brightest", "Celestis", "CubeSats", "Disaster monitoring", "Earth resources", "Education", "Engineering" "Experimental", "Flock", "Galileo", "Geodetic", "Geostationary", "Global Positioning System(GPS) Constellation", "Global Positioning System(GPS) Operational", "Globalstar", "Glonass Constellation", "Glonass Operational", "GOES", "Gonets", "Gorizont", "Intelsat", "Iridium", "IRNSS", "ISS", "Lemur", "Military", "Molniya", "Navy Navigation Satellite System", "NOAA", "O3B Networks", "Orbcomm", "Parus", "QZSS", "Radar Calibration", "Raduga", "Russian LEO Navigation", "Satellite - Based Augmentation System", "Search & rescue", "Space & Earth Science", "Starlink", "Strela", "Tracking and Data Relay Satellite System", "Tselina", "Tsikada", "Tsiklon", "TV", "Weather", "Westford Needles", "XM and Sirius", "Yaogan" };
-	vector<int> satelliteValues = { 18, 35, 1, 45, 32, 8, 6, 29, 28, 19, 48, 22, 27, 10, 50, 20, 17, 51, 21, 5, 40, 12, 11, 15, 46, 2, 49, 30, 14, 24, 4, 43, 16, 38, 47, 31, 13, 25, 23, 7, 26, 52, 39, 9, 44, 42, 41, 34, 3, 37, 33, 36 };
+	string satelliteCategories[52] = { "Amateur radio", "Beidou Navigation System", "Brightest", "Celestis", "CubeSats", "Disaster monitoring", "Earth resources", "Education", "Engineering" "Experimental", "Flock", "Galileo", "Geodetic", "Geostationary", "Global Positioning System(GPS) Constellation", "Global Positioning System(GPS) Operational", "Globalstar", "Glonass Constellation", "Glonass Operational", "GOES", "Gonets", "Gorizont", "Intelsat", "Iridium", "IRNSS", "ISS", "Lemur", "Military", "Molniya", "Navy Navigation Satellite System", "NOAA", "O3B Networks", "Orbcomm", "Parus", "QZSS", "Radar Calibration", "Raduga", "Russian LEO Navigation", "Satellite - Based Augmentation System", "Search & rescue", "Space & Earth Science", "Starlink", "Strela", "Tracking and Data Relay Satellite System", "Tselina", "Tsikada", "Tsiklon", "TV", "Weather", "Westford Needles", "XM and Sirius", "Yaogan" };
+	int satelliteValues[52] = { 18, 35, 1, 45, 32, 8, 6, 29, 28, 19, 48, 22, 27, 10, 50, 20, 17, 51, 21, 5, 40, 12, 11, 15, 46, 2, 49, 30, 14, 24, 4, 43, 16, 38, 47, 31, 13, 25, 23, 7, 26, 52, 39, 9, 44, 42, 41, 34, 3, 37, 33, 36 };
 	
 };
 
-class SatelliteInformation {
-	vector<string> satID;
+class SatelliteData {
+	/*vector<string> satID;
 	vector<string> satOfficialName;
 	vector<string> satDesignator;
 	vector<string> satLaunchDate;
 	vector<string> satLatitude;
 	vector<string> satLongitude;
-	vector<string> satAltitude;
+	vector<string> satAltitude;*/
+
+	string satName;
+	string satID;
+	string satLat;
+	string satLon;
+	string satAlt;
+	string satAzi;
+	string satEle;
+	string satRA;
+	string satDec;
+	string satTime;
+
+
+	/*"satlatitude": -39.86493451,
+      "satlongitude": 158.35261287,
+      "sataltitude": 417.84,
+      "azimuth": 254.33,
+      "elevation": -69.06,
+      "ra": 44.81676119,
+      "dec": -43.98086419,
+      "timestamp": 1521354419
+
+	*/
 
 public:
-	SatelliteInformation() {
+	SatelliteData() {
 
 	}
 
-	void insertSatelliteItem(string passedID, string passedOfficialName, string passedDesignator, string passedLaunchDate, string passedLatitude, string passedLongitude, string passedAltitude) {
+	void createSatellite(string passedName, string passedID, string passedLatitude, string passedLongitude, string passedAltitude, string passedAzimuth, string passedElevation, string passedRA, string passedDec, string passedTimestamp) {
+		setOfficialName(passedName);
 		setID(passedID);
-		setOfficialName(passedOfficialName);
-		setSatelliteDesignator(passedDesignator);
-		setLaunchDate(passedLaunchDate);
 		setLatitude(passedLatitude);
 		setLongitude(passedLongitude);
 		setAltitude(passedAltitude);
+		setAzimuth(passedAzimuth);
+		setElevation(passedElevation);
+		setAscension(passedRA);
+		setDeclination(passedDec);
+		setTimeStamp(passedTimestamp);
 	}
 
-	void display(int choiceValue) {
+	void display() {
 		cout << "\n";
-		displaySatelliteOfficialName(choiceValue);
-		displaySatelliteDesignator(choiceValue);
-		displayLaunchDate(choiceValue);
-		displayAltitude(choiceValue);
-		displayLatitude(choiceValue);
-		displayLongitude(choiceValue);
-	}
-
-	virtual void showCrafts(vector<string> satOfficialName) {
-		for (size_t i = 0; i < satOfficialName.size(); i++) {
-			cout << "\n" << i + 1 << ". " << this->satOfficialName.at(i);
-		}
-	}
-
-	virtual void showSatelliteList() {
-		for (size_t i = 0; i < this->satID.size(); i++) {
-			cout << "\n" << i + 1 << ". " << getSatelliteOfficialName(i);
-		}
-	}
-
-	int satChoice() {
-		int userInput;
-		cout << "\n" << "Your choice: ";
-		cin >> userInput;
-		return userInput;
-	}
-
-	void setID(string passedID) {
-		this->satID.push_back(passedID);
-	}
-
-	string getID(int choice) {
-		return this->satID.at(choice);
-	}
-
-	vector<string> getID() {
-		return this->satID;
+		displaySatelliteOfficialName();
+		displayID();
+		displayLatitude();
+		displayLongitude();
+		displayAltitude();
+		displayAzimuth();
+		displayElevation();
+		displayAscension();
+		displayAscension();
+		displayDeclination();
+		displayTimestamp();
 	}
 
 	void setOfficialName(string passedName) {
-		this->satOfficialName.push_back(passedName);
+		this->satName = passedName;
 	}
 
-	string getSatelliteOfficialName(int choice) {
-		return this->satOfficialName.at(choice);
+	string getSatelliteOfficialName() {
+		return this->satName;
 	}
 
-	void displaySatelliteOfficialName(int choice) {
-		cout << "Name: " << getSatelliteOfficialName(choice) << "\n";
+	void displaySatelliteOfficialName() {
+		cout << "Name: " << getSatelliteOfficialName() << "\n";
 	}
 
-	vector<string> getSatelliteOfficialName() {
-		return this->satOfficialName;
+
+	void setID(string passedID) {
+		this->satID = passedID;
 	}
 
-	void setSatelliteDesignator(string passedDesignator) {
-		this->satDesignator.push_back(passedDesignator);
+	string getID() {
+		return this->satID;
 	}
 
-	string getSatelliteDesignator(int choice) {
-		return this->satDesignator.at(choice);
-	}
-
-	void displaySatelliteDesignator(int choice) {
-		cout << "Designator: " << getSatelliteDesignator(choice) << "\n";
-	}
-
-	vector<string> getSatelliteDesignator() {
-		return this->satDesignator;
-	}
-
-	void setLaunchDate(string passedLaunchDate) {
-		this->satLaunchDate.push_back(passedLaunchDate);
-	}
-
-	string getLaunchDate(int choice) {
-		return this->satLaunchDate.at(choice);
-	}
-
-	void displayLaunchDate(int choice) {
-		cout << "Launch Date: " << getLaunchDate(choice) << "\n";
-	}
-
-	vector<string> getLaunchDate() {
-		return this->satLaunchDate;
+	void displayID() {
+		cout << "ID: " << getID() << "\n";
 	}
 
 	void setLatitude(string passedLatitude) {
-		this->satLatitude.push_back(passedLatitude);
+		this->satLat = passedLatitude;
 	}
 
-	string getLatitude(int choice) {
-		return this->satLatitude.at(choice);
+	string getLatitude() {
+		return this->satLat;
 	}
 
-	void displayLatitude(int choice) {
-		cout << "Latitude: " << getLatitude(choice) << "\n";
-	}
-
-	vector<string> getLatitude() {
-		return this->satLatitude;
+	void displayLatitude() {
+		cout << "Latitude: " << getLatitude() << "\n";
 	}
 
 	void setLongitude(string passedLongitude) {
-		this->satLongitude.push_back(passedLongitude);
-
+		this->satLon = passedLongitude;
 	}
 
-	string getLongitude(int choice) {
-		return this->satLongitude.at(choice);
+	string getLongitude() {
+		return this->satLon;
 	}
 
-	void displayLongitude(int choice) {
-		cout << "Longitude: " << getLongitude(choice) << "\n";
-	}
-
-	vector<string> getLongitude() {
-		return this->satLongitude;
+	void displayLongitude() {
+		cout << "Longitude: " << getLongitude() << "\n";
 	}
 
 	void setAltitude(string passedAltitude) {
-		this->satAltitude.push_back(passedAltitude);
-
+		this->satAlt = passedAltitude;
 	}
 
-	string getAltitude(int choice) {
-		return this->satAltitude.at(choice);
+	string getAltitude() {
+		return this->satAlt;
 	}
 
-	void displayAltitude(int choice) {
-		cout << "Altitude: " << getAltitude(choice) << "\n";
+	void displayAltitude() {
+		cout << "Altitude: " << getAltitude() << "\n";
 	}
 
-	vector<string>getAltitude() {
-		return this->satAltitude;
+	void setAzimuth(string passedAzi){
+		this->satAzi = passedAzi;
+	}
+
+	string getAzimuth() {
+		return this->satAzi;
+	}
+
+	void displayAzimuth() {
+		cout << "Azimuth: " << getAzimuth() << "\n";
+	}
+
+
+	void setElevation(string passedEle) {
+		this->satEle = passedEle;
+	}
+
+	string getElevation() {
+		return this->satEle;
+	}
+
+	void displayElevation() {
+		cout << "Elevation: " << getElevation() << "\n";
+	}
+
+	void setAscension(string passedRA) {
+		this->satRA = passedRA;
+	}
+
+	string getAscension() {
+		return this->satRA;
+	}
+
+	void displayAscension() {
+		cout << "Ascension: " << getAscension() << "\n";
+	}
+
+	void setDeclination(string passedDec) {
+		this->satDec = passedDec;
+	}
+
+	string getDeclination() {
+		return this->satDec;
+	}
+
+	void displayDeclination() {
+		cout << "Declination: " << getDeclination() << "\n";
+	}
+
+	void setTimeStamp(string passedTimestamp) {
+		this->satTime = passedTimestamp;
+	}
+
+	string getTimestamp() {
+		return this->satTime;
+	}
+
+	void displayTimestamp() {
+		cout << "Time: " << getTimestamp() << "\n";
 	}
 
 };
-
-
-class Calculations {
-
-/*	void calculateAzimuth(CurrentLocation cl, SatelliteLocation sl) {
-		// arctan((x2 –x1)/(y2 –y1))
-		atan((stod(cl.getLatitude()) - stod(cl.getLongitude())) / (stod(sl.getLatitude()) - stod(sl.getLongitude())));
-
-	}*/
-
-};
-
 
 class SatelliteLocation {
 	string name;
@@ -297,46 +309,56 @@ public:
 	}
 };
 
+class SatelliteList {
+
+
+
+};
+
 class GetWebData {
-	SatelliteInformation SI;
+	SatelliteList SL;
 	
 public:
-	void initializeAPI(CurrentLocation cl) {
+	void pullDownWebData(CurrentLocation cl) {
 		string rawSatelliteOutput = downloadSatelliteList(cl);
 		vector<string> unformattedSatelliteList = convertSatelliteToJSON(rawSatelliteOutput);
 		insertSatellitesAboveToVectors(unformattedSatelliteList);
 	}
 
-	SatelliteInformation getSIData() {
-		return this->SI;
+	SatelliteData getSatelliteData() {
+		return this->SD;
 	}
 
-	string getID(int choice) {
-		return this->SI.getID(choice);
+	string getID() {
+		return this->SD.getID();
 	}
 
-	string getSatelliteOfficialName(int choice) {
-		return this->SI.getSatelliteOfficialName(choice);
+	string getSatelliteOfficialName() {
+		return this->SD.getSatelliteOfficialName();
 	}
 
-	string getSatelliteDesignator(int choice) {
-		return this->SI.getSatelliteDesignator(choice);
+	string getLatitude() {
+		return this->SD.getLatitude();
 	}
 
-	string getLaunchDate(int choice) {
-		return this->SI.getLaunchDate(choice);
+	string getLongitude() {
+		return this->SD.getLongitude();
 	}
 
-	string getLatitude(int choice) {
-		return this->SI.getLatitude(choice);
+	string getAltitude() {
+		return this->SD.getAltitude();
+	}
+	
+	string getElevation() {
+		return this->SD.getElevation();
 	}
 
-	string getLongitude(int choice) {
-		return this->SI.getLongitude(choice);
+	string getDeclination() {
+		return this->SD.getDeclination();
 	}
 
-	string getAltitude(int choice) {
-		return this->SI.getAltitude(choice);
+	string getAzimuth() {
+		return this->SD.getAzimuth();
 	}
 
 private:
@@ -361,7 +383,7 @@ private:
 	void insertSatellitesAboveToVectors(vector<string> unformattedSatelliteList) {
 		for (size_t p = 0; p < unformattedSatelliteList.size(); p++) {
 			json stringToJSON = json::parse(unformattedSatelliteList.at(p));
-			SI.insertSatelliteItem(to_string(stringToJSON.find("satid").value()), to_string(stringToJSON.find("satname").value()), to_string(stringToJSON.find("intDesignator").value()), to_string(stringToJSON.find("launchDate").value()), to_string(stringToJSON.find("satlat").value()), to_string(stringToJSON.find("satlng").value()), to_string(stringToJSON.find("satalt").value()));
+			SI.createSatellite(to_string(stringToJSON.find("satname").value()), to_string(stringToJSON.find("satid").value()), to_string(stringToJSON.find("satlatitude").value()), to_string(stringToJSON.find("satlongitude").value()), to_string(stringToJSON.find("sataltitude").value()), to_string(stringToJSON.find("azimuth").value()), to_string(stringToJSON.find("elevation").value()), to_string(stringToJSON.find("ra").value()), to_string(stringToJSON.find("dec").value()), to_string(stringToJSON.find("timestamp").value()));
 		}
 	}
 
@@ -384,12 +406,12 @@ private:
 int main() {
 	int userInput;
 	cout << "Sat Track\n";
-	SatelliteInformation SI;
+	SatelliteData SI;
 	GetWebData apc;
 	CurrentLocation CL;
 	SatelliteLocation sl;
-	apc.initializeAPI(CL);
-	SI = apc.getSIData();
+	apc.pullDownWebData(CL);
+	SI = apc.getSatelliteData();
 
 	SI.showSatelliteList();
 	userInput = SI.satChoice();
@@ -397,14 +419,3 @@ int main() {
 //	sl = SI.outputToClass(userInput - 1);
 	return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

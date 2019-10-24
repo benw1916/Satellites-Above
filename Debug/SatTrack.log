@@ -1,3 +1,15 @@
 ﻿  SatTrack.cpp
-c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(61): warning C4018: '<': signed/unsigned mismatch
-  SatTrack.vcxproj -> C:\Users\MHP-14M-D5\source\repos\SatTrack\Debug\SatTrack.exe
+c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(61): error C3867: 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::length': non-standard syntax; use '&' to create a pointer to member
+c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(61): error C2446: '<': no conversion from 'unsigned int (__thiscall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::* )(void) noexcept const' to 'int'
+  c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(61): note: There is no context in which this conversion is possible
+c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(335): error C2039: 'getSatelliteDesignator': is not a member of 'SatelliteData'
+  c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(93): note: see declaration of 'SatelliteData'
+c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(402): error C2039: 'showSatelliteList': is not a member of 'SatelliteData'
+  c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(93): note: see declaration of 'SatelliteData'
+c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(403): error C2039: 'satChoice': is not a member of 'SatelliteData'
+  c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(93): note: see declaration of 'SatelliteData'
+c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(404): error C2660: 'SatelliteData::display': function does not take 1 arguments
+  c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(143): note: see declaration of 'SatelliteData::display'
+  WebData.h
+c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\webdata.h(84): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  Generating Code...
