@@ -1,2 +1,3 @@
 ﻿  SatTrack.cpp
+c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(61): warning C4018: '<': signed/unsigned mismatch
   SatTrack.vcxproj -> C:\Users\MHP-14M-D5\source\repos\SatTrack\Debug\SatTrack.exe
