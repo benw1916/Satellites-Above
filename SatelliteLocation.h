@@ -1,6 +1,12 @@
 #pragma once
 
-/*class SatelliteLocation {
+#include "pch.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class SatelliteLocation {
 	string name;
 	string longitude;
 	string latitude;
@@ -28,4 +34,4 @@ public:
 	string getAltitude() {
 		return this->altitude;
 	}
-};*/
+};

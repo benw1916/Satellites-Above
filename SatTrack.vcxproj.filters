@@ -24,6 +24,12 @@
     <ClInclude Include="SatelliteLocation.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="SatelliteList.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SatelliteData.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

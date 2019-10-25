@@ -1,46 +1,54 @@
 #pragma once
+#include "pch.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <cpr/cpr.h>
+#include <json/json.h>
+#include <json/reader.h>
+#include <json/writer.h>
+#include <json/value.h>
+#include <nlohmann/json.hpp>
+#include "CurrentLocation.h"
+#include "SatelliteList.h"
 
-/*class GetWebData {
-	SatelliteInformation SI;
+using namespace std;
+using json = nlohmann::json;
+
+class WebData {
+	SatelliteList SL;
 
 public:
-	void initializeAPI(CurrentLocation cl) {
+	void pullDownWebData(CurrentLocation cl) {
 		string rawSatelliteOutput = downloadSatelliteList(cl);
 		vector<string> unformattedSatelliteList = convertSatelliteToJSON(rawSatelliteOutput);
 		insertSatellitesAboveToVectors(unformattedSatelliteList);
 	}
 
-	SatelliteInformation getSIData() {
-		return this->SI;
+	SatelliteList getSatelliteList() {
+		return this->SL;
 	}
 
-	string getID(int choice) {
-		return this->SI.getID(choice);
+	vector<string> getID() {
+		return this->SL.getSatID();
 	}
 
-	string getSatelliteOfficialName(int choice) {
-		return this->SI.getSatelliteOfficialName(choice);
+	vector<string> getSatelliteOfficialName() {
+		return this->SL.getOfficialName();
 	}
 
-	string getSatelliteDesignator(int choice) {
-		return this->SI.getSatelliteDesignator(choice);
+	vector<string> getLatitude() {
+		return this->SL.getLatitude();
 	}
 
-	string getLaunchDate(int choice) {
-		return this->SI.getLaunchDate(choice);
+	vector<string> getLongitude() {
+		return this->SL.getLongitude();
 	}
 
-	string getLatitude(int choice) {
-		return this->SI.getLatitude(choice);
+	vector<string> getAltitude() {
+		return this->SL.getAltitude();
 	}
 
-	string getLongitude(int choice) {
-		return this->SI.getLongitude(choice);
-	}
-
-	string getAltitude(int choice) {
-		return this->SI.getAltitude(choice);
-	}
 
 private:
 	string downloadSatelliteList(CurrentLocation udcl) {
@@ -64,7 +72,7 @@ private:
 	void insertSatellitesAboveToVectors(vector<string> unformattedSatelliteList) {
 		for (size_t p = 0; p < unformattedSatelliteList.size(); p++) {
 			json stringToJSON = json::parse(unformattedSatelliteList.at(p));
-			SI.insertSatelliteItem(to_string(stringToJSON.find("satid").value()), to_string(stringToJSON.find("satname").value()), to_string(stringToJSON.find("intDesignator").value()), to_string(stringToJSON.find("launchDate").value()), to_string(stringToJSON.find("satlat").value()), to_string(stringToJSON.find("satlng").value()), to_string(stringToJSON.find("satalt").value()));
+			SL.insertSatelliteItem(to_string(stringToJSON.find("satid").value()), to_string(stringToJSON.find("satname").value()), to_string(stringToJSON.find("intDesignator").value()), to_string(stringToJSON.find("launchDate").value()), to_string(stringToJSON.find("satlat").value()), to_string(stringToJSON.find("satlng").value()), to_string(stringToJSON.find("satalt").value()));
 		}
 	}
 
@@ -72,12 +80,12 @@ private:
 		return "DARUHH-CVU8AH-H9U5KE-47PU";
 	}
 
-	string getSatellitesAboveURL(CurrentLocation cl) {
+	virtual string getSatellitesAboveURL(CurrentLocation cl) {
 		return "https://www.n2yo.com/rest/v1/satellite/above/" + cl.getLatitude() + "/" + cl.getLongitude() + "/" + cl.getElevation() + "/90/" + to_string(cl.getCategory()) + "/&apiKey=" + getAPIKey();
 	}
 
-	string getSpecificSatelliteDataURL(string satelliteChoice, CurrentLocation cl) {
+	virtual string getSpecificSatelliteDataURL(string satelliteChoice, CurrentLocation cl) {
 		return "http://www.n2yo.com/rest/v1/satellite/visualpasses/" + satelliteChoice + "/" + cl.getLatitude() + "/" + cl.getLongitude() + "/" + cl.getElevation() + "/0/300/&apiKey=" + getAPIKey();
 	}
 
-};*/
+};
