@@ -1,3 +1,3 @@
 ﻿  WebData.h
-c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\satellitelist.h(31): warning C4018: '<': signed/unsigned mismatch
+c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\batchlist.h(31): warning C4018: '<': signed/unsigned mismatch
   SatTrack.vcxproj -> C:\Users\MHP-14M-D5\source\repos\SatTrack\Debug\SatTrack.exe

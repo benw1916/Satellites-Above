@@ -19,7 +19,7 @@ class SatelliteData {
 	string satRA;
 	string satDec;
 	string satTime;
-
+	int satelliteChoice;
 
 
 	/*"satlatitude": -39.86493451,
@@ -34,7 +34,7 @@ class SatelliteData {
 	*/
 
 public:
-	SatelliteData() {
+	SatelliteData(string passedID) {
 
 	}
 
@@ -64,6 +64,12 @@ public:
 		displayAscension();
 		displayDeclination();
 		displayTimestamp();
+	}
+
+	int chooseSpecificSatellite() {
+		cout << "Choose a specific satellite: ";
+		cin >> this->satelliteChoice;
+		return this->satelliteChoice;
 	}
 
 	void setOfficialName(string passedName) {

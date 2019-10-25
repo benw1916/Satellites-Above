@@ -154,7 +154,7 @@
     <ClInclude Include="CurrentLocation.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="SatelliteData.h" />
-    <ClInclude Include="SatelliteList.h" />
+    <ClInclude Include="BatchList.h" />
     <ClInclude Include="SatelliteLocation.h" />
   </ItemGroup>
   <ItemGroup>

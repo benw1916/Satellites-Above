@@ -24,10 +24,10 @@
     <ClInclude Include="SatelliteLocation.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="SatelliteList.h">
+    <ClInclude Include="SatelliteData.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="SatelliteData.h">
+    <ClInclude Include="BatchList.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

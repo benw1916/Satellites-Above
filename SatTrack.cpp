@@ -21,14 +21,14 @@ int main() {
 	cout << "Sat Track\n";
 	SatelliteData SI;
 	CurrentLocation CL;
-	SatelliteList SatList;
+	BatchList SatList;
 	WebData apc;
 
 	apc.pullDownWebData(CL);
 	SatList = apc.getSatelliteList();
 
 	SatList.displaySatelliteList();
-//	userInput = SI.satChoice();
+	userInput = SI.chooseSpecificSatellite();
 //	SI.display(userInput - 1);
 
 

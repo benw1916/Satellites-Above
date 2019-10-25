@@ -10,13 +10,13 @@
 #include <json/value.h>
 #include <nlohmann/json.hpp>
 #include "CurrentLocation.h"
-#include "SatelliteList.h"
+#include "BatchList.h"
 
 using namespace std;
 using json = nlohmann::json;
 
 class WebData {
-	SatelliteList SL;
+	BatchList SL;
 
 public:
 	void pullDownWebData(CurrentLocation cl) {
@@ -25,7 +25,11 @@ public:
 		insertSatellitesAboveToVectors(unformattedSatelliteList);
 	}
 
-	SatelliteList getSatelliteList() {
+	void downloadDetailedSatelliteData(CurrentLocation cl, string passedSatelliteChoice) {
+		getSpecificSatelliteDataURL
+	}
+
+	BatchList getSatelliteList() {
 		return this->SL;
 	}
 
@@ -55,6 +59,10 @@ private:
 		return cpr::Get(cpr::Url{ getSatellitesAboveURL(udcl) }).text;
 	}
 
+	string downloadSpecificSatelliteData(string passedSatelliteChoice, CurrentLocation udcl) {
+		return cpr::Get(cpr::Url{ getSpecificSatelliteDataURL(passedSatelliteChoice, udcl) }).text;
+	}
+
 	vector<string> convertSatelliteToJSON(string rawSatelliteOutput) {
 		json jsonData = json::parse(rawSatelliteOutput);
 		vector<string> satellitesAbove;
@@ -75,6 +83,12 @@ private:
 			SL.insertSatelliteItem(to_string(stringToJSON.find("satid").value()), to_string(stringToJSON.find("satname").value()), to_string(stringToJSON.find("intDesignator").value()), to_string(stringToJSON.find("launchDate").value()), to_string(stringToJSON.find("satlat").value()), to_string(stringToJSON.find("satlng").value()), to_string(stringToJSON.find("satalt").value()));
 		}
 	}
+
+	void insertSpecificSatelliteData() {
+		json stringToJSON = json::parse(unformattedSatelliteList.at(p));
+
+	}
+
 
 	string getAPIKey() {
 		return "DARUHH-CVU8AH-H9U5KE-47PU";
