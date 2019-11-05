@@ -25,9 +25,9 @@ public:
 		insertSatellitesAboveToVectors(unformattedSatelliteList);
 	}
 
-	void downloadDetailedSatelliteData(CurrentLocation cl, string passedSatelliteChoice) {
-		getSpecificSatelliteDataURL
-	}
+/*	void downloadDetailedSatelliteData(CurrentLocation cl, string passedSatelliteChoice) {
+		getSpecificSatelliteDataURL;
+	}*/
 
 	BatchList getSatelliteList() {
 		return this->SL;
@@ -41,15 +41,15 @@ public:
 		return this->SL.getOfficialName();
 	}
 
-	vector<string> getLatitude() {
+	vector<double> getLatitude() {
 		return this->SL.getLatitude();
 	}
 
-	vector<string> getLongitude() {
+	vector<double> getLongitude() {
 		return this->SL.getLongitude();
 	}
 
-	vector<string> getAltitude() {
+	vector<double> getAltitude() {
 		return this->SL.getAltitude();
 	}
 
@@ -80,14 +80,14 @@ private:
 	void insertSatellitesAboveToVectors(vector<string> unformattedSatelliteList) {
 		for (size_t p = 0; p < unformattedSatelliteList.size(); p++) {
 			json stringToJSON = json::parse(unformattedSatelliteList.at(p));
-			SL.insertSatelliteItem(to_string(stringToJSON.find("satid").value()), to_string(stringToJSON.find("satname").value()), to_string(stringToJSON.find("intDesignator").value()), to_string(stringToJSON.find("launchDate").value()), to_string(stringToJSON.find("satlat").value()), to_string(stringToJSON.find("satlng").value()), to_string(stringToJSON.find("satalt").value()));
+			SL.insertSatelliteItem(to_string(stringToJSON.find("satid").value()), to_string(stringToJSON.find("satname").value()), to_string(stringToJSON.find("intDesignator").value()), to_string(stringToJSON.find("launchDate").value()), stringToJSON.find("satlat").value(), stringToJSON.find("satlng").value(), stringToJSON.find("satalt").value());
 		}
 	}
 
-	void insertSpecificSatelliteData() {
+	/*void insertSpecificSatelliteData() {
 		json stringToJSON = json::parse(unformattedSatelliteList.at(p));
 
-	}
+	}*/
 
 
 	string getAPIKey() {
@@ -95,11 +95,11 @@ private:
 	}
 
 	virtual string getSatellitesAboveURL(CurrentLocation cl) {
-		return "https://www.n2yo.com/rest/v1/satellite/above/" + cl.getLatitude() + "/" + cl.getLongitude() + "/" + cl.getElevation() + "/90/" + to_string(cl.getCategory()) + "/&apiKey=" + getAPIKey();
+		return "https://www.n2yo.com/rest/v1/satellite/above/" +  to_string(cl.getLatitude()) + "/" + to_string(cl.getLongitude()) + "/" + to_string(cl.getElevation()) + "/90/" + to_string(cl.getCategory()) + "/&apiKey=" + getAPIKey();
 	}
 
 	virtual string getSpecificSatelliteDataURL(string satelliteChoice, CurrentLocation cl) {
-		return "http://www.n2yo.com/rest/v1/satellite/visualpasses/" + satelliteChoice + "/" + cl.getLatitude() + "/" + cl.getLongitude() + "/" + cl.getElevation() + "/0/300/&apiKey=" + getAPIKey();
+		return "http://www.n2yo.com/rest/v1/satellite/visualpasses/" + satelliteChoice + "/" + to_string(cl.getLatitude()) + "/" + to_string(cl.getLongitude()) + "/" + to_string(cl.getElevation()) + "/0/300/&apiKey=" + getAPIKey();
 	}
 
 };

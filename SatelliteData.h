@@ -1,5 +1,3 @@
-#pragma once
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -11,11 +9,11 @@ class SatelliteData {
 
 	string satName;
 	string satID;
-	string satLat;
-	string satLon;
-	string satAlt;
+	double satLat;
+	double satLon;
+	double satAlt;
 	string satAzi;
-	string satEle;
+	double satEle;
 	string satRA;
 	string satDec;
 	string satTime;
@@ -34,11 +32,15 @@ class SatelliteData {
 	*/
 
 public:
+	SatelliteData() {
+
+	}
+
 	SatelliteData(string passedID) {
 
 	}
 
-	void createSatellite(string passedName, string passedID, string passedLatitude, string passedLongitude, string passedAltitude, string passedAzimuth, string passedElevation, string passedRA, string passedDec, string passedTimestamp) {
+	void createSatellite(string passedName, string passedID, double passedLatitude, double passedLongitude, double passedAltitude, string passedAzimuth, double passedElevation, string passedRA, string passedDec, string passedTimestamp) {
 		setOfficialName(passedName);
 		setID(passedID);
 		setLatitude(passedLatitude);
@@ -67,7 +69,7 @@ public:
 	}
 
 	int chooseSpecificSatellite() {
-		cout << "Choose a specific satellite: ";
+		cout << "\nChoose a specific satellite: ";
 		cin >> this->satelliteChoice;
 		return this->satelliteChoice;
 	}
@@ -97,11 +99,11 @@ public:
 		cout << "ID: " << getID() << "\n";
 	}
 
-	void setLatitude(string passedLatitude) {
+	void setLatitude(double passedLatitude) {
 		this->satLat = passedLatitude;
 	}
 
-	string getLatitude() {
+	double getLatitude() {
 		return this->satLat;
 	}
 
@@ -109,11 +111,11 @@ public:
 		cout << "Latitude: " << getLatitude() << "\n";
 	}
 
-	void setLongitude(string passedLongitude) {
+	void setLongitude(double passedLongitude) {
 		this->satLon = passedLongitude;
 	}
 
-	string getLongitude() {
+	double getLongitude() {
 		return this->satLon;
 	}
 
@@ -121,11 +123,11 @@ public:
 		cout << "Longitude: " << getLongitude() << "\n";
 	}
 
-	void setAltitude(string passedAltitude) {
+	void setAltitude(double passedAltitude) {
 		this->satAlt = passedAltitude;
 	}
 
-	string getAltitude() {
+	double getAltitude() {
 		return this->satAlt;
 	}
 
@@ -146,11 +148,11 @@ public:
 	}
 
 
-	void setElevation(string passedEle) {
+	void setElevation(double passedEle) {
 		this->satEle = passedEle;
-	}
+	};
 
-	string getElevation() {
+	double getElevation() {
 		return this->satEle;
 	}
 

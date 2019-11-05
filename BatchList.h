@@ -12,12 +12,12 @@ class BatchList {
 	vector<string> satOfficialName;
 	vector<string> satDesignator;
 	vector<string> satLaunchDate;
-	vector<string> satLatitude;
-	vector<string> satLongitude;
-	vector<string> satAltitude;
+	vector<double> satLatitude;
+	vector<double> satLongitude;
+	vector<double> satAltitude;
 
 public:
-	void insertSatelliteItem(string passedID, string passedName, string passedDesignator, string passedLaunch, string passedLat, string passedLon, string passedAlt) {
+	void insertSatelliteItem(string passedID, string passedName, string passedDesignator, string passedLaunch, double passedLat, double passedLon, double passedAlt) {
 		this->satID.push_back(passedID);
 		this->satOfficialName.push_back(passedName);
 		this->satDesignator.push_back(passedDesignator);
@@ -49,15 +49,15 @@ public:
 		return this->satLaunchDate;
 	}
 
-	vector<string> getLatitude() {
+	vector<double> getLatitude() {
 		return this->satLatitude;
 	}
 
-	vector<string> getLongitude() {
+	vector<double> getLongitude() {
 		return this->satLongitude;
 	}
 
-	vector<string> getAltitude() {
+	vector<double> getAltitude() {
 		return this->satAltitude;
 	}
 
