@@ -5,9 +5,9 @@
 #include <string>
 #include <stdio.h>
 
-#include "CurrentLocation.h"
+#include "UserLocation.h"
 #include "WebData.h"
-#include "SatelliteData.h"
+#include "ExpandedData.h"
 
 using namespace std;
 
@@ -19,9 +19,9 @@ using namespace std;
 int main() {
 	int userInput;
 	cout << "Sat Track\n";
-	SatelliteData SI;
-	CurrentLocation CL(-83.045, 42.331, 200.0);
-	BatchList SatList;
+	ExpandedData SI;
+	UserLocation CL(-83.045, 42.331, 200.0);
+	SatelliteList SatList;
 	WebData apc;
 
 	apc.downloadBroadSatelliteList(CL);

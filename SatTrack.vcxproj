@@ -151,11 +151,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CurrentLocation.h" />
+    <ClInclude Include="CategoryData.h" />
+    <ClInclude Include="UserLocation.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="SatelliteData.h" />
-    <ClInclude Include="BatchList.h" />
-    <ClInclude Include="SatelliteLocation.h" />
+    <ClInclude Include="ExpandedData.h" />
+    <ClInclude Include="SatelliteList.h" />
+    <ClInclude Include="shortData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

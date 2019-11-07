@@ -9,27 +9,27 @@
 #include <json/writer.h>
 #include <json/value.h>
 #include <nlohmann/json.hpp>
-#include "CurrentLocation.h"
-#include "BatchList.h"
+#include "UserLocation.h"
+#include "SatelliteList.h"
 
 using namespace std;
 using json = nlohmann::json;
 
 class WebData {
-	BatchList SL;
+	SatelliteList SL;
 
 public:
-	void pullDownWebData(CurrentLocation cl) {
+	void downloadBroadSatelliteList(UserLocation cl) {
 		string rawSatelliteOutput = downloadSatelliteList(cl);
 		vector<string> unformattedSatelliteList = convertSatelliteToJSON(rawSatelliteOutput);
 		insertSatellitesAboveToVectors(unformattedSatelliteList);
 	}
 
-/*	void downloadDetailedSatelliteData(CurrentLocation cl, string passedSatelliteChoice) {
-		getSpecificSatelliteDataURL;
-	}*/
+	void downloadDetailedSatellite(UserLocation cl, string passedSatelliteChoice) {
+		//getSpecificSatelliteDataURL();
+	}
 
-	BatchList getSatelliteList() {
+	SatelliteList getSatelliteList() {
 		return this->SL;
 	}
 
@@ -55,11 +55,11 @@ public:
 
 
 private:
-	string downloadSatelliteList(CurrentLocation udcl) {
+	string downloadSatelliteList(UserLocation udcl) {
 		return cpr::Get(cpr::Url{ getSatellitesAboveURL(udcl) }).text;
 	}
 
-	string downloadSpecificSatelliteData(string passedSatelliteChoice, CurrentLocation udcl) {
+	string downloadSpecificSatelliteData(string passedSatelliteChoice, UserLocation udcl) {
 		return cpr::Get(cpr::Url{ getSpecificSatelliteDataURL(passedSatelliteChoice, udcl) }).text;
 	}
 
@@ -80,7 +80,7 @@ private:
 	void insertSatellitesAboveToVectors(vector<string> unformattedSatelliteList) {
 		for (size_t p = 0; p < unformattedSatelliteList.size(); p++) {
 			json stringToJSON = json::parse(unformattedSatelliteList.at(p));
-			SL.insertSatelliteItem(to_string(stringToJSON.find("satid").value()), to_string(stringToJSON.find("satname").value()), to_string(stringToJSON.find("intDesignator").value()), to_string(stringToJSON.find("launchDate").value()), stringToJSON.find("satlat").value(), stringToJSON.find("satlng").value(), stringToJSON.find("satalt").value());
+			SL.insertSatellite(to_string(stringToJSON.find("satid").value()), to_string(stringToJSON.find("satname").value()), to_string(stringToJSON.find("intDesignator").value()), to_string(stringToJSON.find("launchDate").value()), stringToJSON.find("satlat").value(), stringToJSON.find("satlng").value(), stringToJSON.find("satalt").value());
 		}
 	}
 
@@ -90,15 +90,15 @@ private:
 	}*/
 
 
-	string getAPIKey() {
+	static string getAPIKey() {
 		return "DARUHH-CVU8AH-H9U5KE-47PU";
 	}
 
-	virtual string getSatellitesAboveURL(CurrentLocation cl) {
+	static string getSatellitesAboveURL(UserLocation cl) {
 		return "https://www.n2yo.com/rest/v1/satellite/above/" +  to_string(cl.getLatitude()) + "/" + to_string(cl.getLongitude()) + "/" + to_string(cl.getElevation()) + "/90/" + to_string(cl.getCategory()) + "/&apiKey=" + getAPIKey();
 	}
 
-	virtual string getSpecificSatelliteDataURL(string satelliteChoice, CurrentLocation cl) {
+	static string getSpecificSatelliteDataURL(string satelliteChoice, UserLocation cl) {
 		return "http://www.n2yo.com/rest/v1/satellite/visualpasses/" + satelliteChoice + "/" + to_string(cl.getLatitude()) + "/" + to_string(cl.getLongitude()) + "/" + to_string(cl.getElevation()) + "/0/300/&apiKey=" + getAPIKey();
 	}
 

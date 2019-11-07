@@ -1,3 +1,7 @@
-﻿  WebData.h
-c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\batchlist.h(31): warning C4018: '<': signed/unsigned mismatch
-  SatTrack.vcxproj -> C:\Users\MHP-14M-D5\source\repos\SatTrack\Debug\SatTrack.exe
+﻿  SatTrack.cpp
+c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\satellitelist.h(31): warning C4018: '<': signed/unsigned mismatch
+c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(33): error C2664: 'std::string WebData::downloadSpecificSatelliteData(std::string,UserLocation)': cannot convert argument 1 from 'int' to 'std::string'
+  c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\sattrack.cpp(33): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+  WebData.h
+c:\users\mhp-14m-d5\source\repos\sattrack\sattrack\satellitelist.h(31): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...

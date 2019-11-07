@@ -18,17 +18,20 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CurrentLocation.h">
+    <ClInclude Include="ExpandedData.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="SatelliteLocation.h">
+    <ClInclude Include="SatelliteList.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="SatelliteData.h">
+    <ClInclude Include="UserLocation.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="BatchList.h">
+    <ClInclude Include="shortData.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CategoryData.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
